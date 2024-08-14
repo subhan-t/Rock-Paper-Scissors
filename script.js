@@ -11,31 +11,40 @@ function getPlayerChoice() {
   //   return playerChoice.toUpperCase();
 }
 
-let playerScore = 0;
-let computerScore = 0;
+function playGame() {
+  let playerScore = 0;
+  let computerScore = 0;
 
-function playRound(playerChoice, computerChoice) {
-  if (playerChoice === computerChoice) console.log("It's a tie!");
-  else if (
-    (playerChoice === "ROCK" && computerChoice === "PAPER") ||
-    (playerChoice === "SCISSORS" && computerChoice === "ROCK") ||
-    (playerChoice === "PAPER" && computerChoice === "SCISSORS")
-  ) {
-    console.log("Computer wins this round!");
-    computerScore++;
+  for (let round = 0; round < 5; round++) {
+    playRound(getPlayerChoice(), getComputerChoice());
+  }
+  if (playerScore === computerScore) console.log("The game is a draw!");
+  else if (playerScore > computerScore) console.log("Player wins!");
+  else console.log("Computer wins!");
+
+  function playRound(playerChoice, computerChoice) {
     console.log(
-      "SCORE: Player = " + playerScore + " | Computer = " + computerScore
+      "Player chose: " + playerChoice + "| Computer chose: " + computerChoice
     );
-  } else {
-    console.log("Player wins this round!");
-    playerScore++;
-    console.log(
-      "SCORE: Player = " + playerScore + "| Computer = " + computerScore
-    );
+    if (playerChoice === computerChoice) console.log("It's a tie!");
+    else if (
+      (playerChoice === "ROCK" && computerChoice === "PAPER") ||
+      (playerChoice === "SCISSORS" && computerChoice === "ROCK") ||
+      (playerChoice === "PAPER" && computerChoice === "SCISSORS")
+    ) {
+      console.log("Computer wins this round!");
+      computerScore++;
+      console.log(
+        "SCORE: Player = " + playerScore + " | Computer = " + computerScore
+      );
+    } else {
+      console.log("Player wins this round!");
+      playerScore++;
+      console.log(
+        "SCORE: Player = " + playerScore + "| Computer = " + computerScore
+      );
+    }
   }
 }
 
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice();
-
-playRound(playerSelection, computerSelection);
+playGame();
